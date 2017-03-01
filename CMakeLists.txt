@@ -1,0 +1,15 @@
+cmake_minimum_required (VERSION 2.8)
+set(CMAKE_MODULE_PATH "/usr/local/lib/cmake/${CMAKE_MODULE_PATH}")
+project (raspicam_test)
+find_package(raspicam REQUIRED)
+find_package(OpenCV)
+
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+
+IF  ( OpenCV_FOUND AND raspicam_CV_FOUND)
+  MESSAGE(STATUS "COMPILING OPENCV TESTS")
+  add_executable (picam picam.cpp)
+  target_link_libraries (picam ${raspicam_CV_LIBS})
+ELSE()
+  MESSAGE(FATAL_ERROR "Libs Missing")
+ENDIF()
